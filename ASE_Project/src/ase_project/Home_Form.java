@@ -1045,144 +1045,92 @@ public class Home_Form extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnCallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCallActionPerformed
+        JOptionPane.showMessageDialog(this, "Calling +20 010 1234 5678");
+    }//GEN-LAST:event_btnCallActionPerformed
 
-        String Username = tfUsername.getText();
-        String Password = pfPassword.getText();
-        
-        if (Username.isEmpty()){
-        JOptionPane.showMessageDialog(this, "Please, Enter your username");
-        }
-        
-        if (Password.isEmpty()){
-        JOptionPane.showMessageDialog(this, "Please, Enter your password");
-        }
-        
+    private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
+        String Name = tbName.getText();
+        String Email = tbEmail.getText();
+        String Message = tbMessage.getText();
+
+        if (Name.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your name");
+
+        if (Email.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your Email");
+
+        if (Message.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your Message");
+
         Connection con =  null;
         Statement stmt =  null;
-        ResultSet result =  null;
-        
+
+        if (Name.isEmpty() || Email.isEmpty() || Message.isEmpty())
+        return;
+
         try{
+
             con= DriverManager.getConnection(Url);
             stmt = con.createStatement();
-            String query = "SELECT * FROM Staff WHERE Username='" + Username + "' AND Password='" + Password + "'";
-            result = stmt.executeQuery(query);
-            String FullName = null;
-            if (result.next()){
-            FullName =  result.getString("FullName");
-            JOptionPane.showMessageDialog(this, "Welcome "+FullName);
-            }else
-            {
-                JOptionPane.showMessageDialog(this, "Invalid Username or password");
-            }
-        
-       
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }finally{
-            if(con != null) { try{ con.close();} catch (Exception ex) {}}
-            if(stmt != null) { try{ stmt.close();} catch (Exception ex) {}}
-            if(result != null) { try{ result.close();} catch (Exception ex) {}}
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
+            String query = "INSERT INTO Messages VALUES ('"+Name+"','"+Email+"','"+Message+"')";
 
-    private void btnRegistration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistration1ActionPerformed
-       String FullName = tfStaffFullName.getText();
-       String Username = tfStaffUsername.getText();
-       String Password = pfStaffPassword.getText();
-       String ConfirmPassword = pfStaffConfirmPassword.getText();
-       
-       LocalDate myObj = LocalDate.of(2022,2,2);
-       JOptionPane.showMessageDialog(this,myObj);
-       
-       
-       if (FullName.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your full name");
-       
-       if (Username.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your username");
-       
-       if (Password.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your password");
-       
-       if (ConfirmPassword.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your confirm password");
-
-       if(!Password.matches(ConfirmPassword))
-           JOptionPane.showMessageDialog(this, "your passwords dont match !!!");
-       
-        Connection con =  null;
-        Statement stmt =  null;
-        
-        if (FullName.isEmpty() || Username.isEmpty() || Password.isEmpty() || Password.isEmpty()
-                || ConfirmPassword.isEmpty() || (!Password.matches(ConfirmPassword)))
-            return;
-        
-        try{
-            
-            con= DriverManager.getConnection(Url);
-            stmt = con.createStatement();
-            String query = "INSERT INTO Staff VALUES ('"+FullName+"','"+Username+"','"+Password+"')";
-            
             int affectedRows = stmt.executeUpdate(query);
-            
+
             if (affectedRows == 1){
-                tfStaffFullName.setText(null);
-                tfStaffUsername.setText(null);
-                pfStaffPassword.setText(null);
-                pfStaffConfirmPassword.setText(null);
-                JOptionPane.showMessageDialog(this, "Successful Registration!!!");
+                tbName.setText(null);
+                tbEmail.setText(null);
+                tbMessage.setText(null);
+                JOptionPane.showMessageDialog(this, "Successful Sending!!!");
             }
             else
-                JOptionPane.showMessageDialog(this, "Error !!!");
+            JOptionPane.showMessageDialog(this, "Error !!!");
 
-        
-       
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }finally{
             if(con != null) { try{ con.close();} catch (Exception ex) {}}
             if(stmt != null) { try{ stmt.close();} catch (Exception ex) {}}
         }
-    }//GEN-LAST:event_btnRegistration1ActionPerformed
+
+    }//GEN-LAST:event_btnSendMessageActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-       String FullName = tfStaffFullName.getText();
-       String Username = tfStaffUsername.getText();
-       String Password = pfStaffPassword.getText();
-       String ConfirmPassword = pfStaffConfirmPassword.getText();
-       
-       
-       if (FullName.isEmpty())
+        String FullName = tfStaffFullName.getText();
+        String Username = tfStaffUsername.getText();
+        String Password = pfStaffPassword.getText();
+        String ConfirmPassword = pfStaffConfirmPassword.getText();
+
+        if (FullName.isEmpty())
         JOptionPane.showMessageDialog(this, "Please enter your full name");
-       
-       if (Username.isEmpty())
+
+        if (Username.isEmpty())
         JOptionPane.showMessageDialog(this, "Please enter your username");
-       
-       if (Password.isEmpty())
+
+        if (Password.isEmpty())
         JOptionPane.showMessageDialog(this, "Please enter your password");
-       
-       if (ConfirmPassword.isEmpty())
+
+        if (ConfirmPassword.isEmpty())
         JOptionPane.showMessageDialog(this, "Please enter your confirm password");
 
-       if(!Password.matches(ConfirmPassword))
-           JOptionPane.showMessageDialog(this, "your passwords dont match !!!");
-       
+        if(!Password.matches(ConfirmPassword))
+        JOptionPane.showMessageDialog(this, "your passwords dont match !!!");
+
         Connection con =  null;
         Statement stmt =  null;
-        
+
         if (FullName.isEmpty() || Username.isEmpty() || Password.isEmpty() || Password.isEmpty()
-                || ConfirmPassword.isEmpty() || (!Password.matches(ConfirmPassword)))
-            return;
-        
+            || ConfirmPassword.isEmpty() || (!Password.matches(ConfirmPassword)))
+        return;
+
         try{
-            
+
             con= DriverManager.getConnection(Url);
             stmt = con.createStatement();
             String query = "INSERT INTO Staff VALUES ('"+FullName+"','"+Username+"','"+Password+"')";
-            
+
             int affectedRows = stmt.executeUpdate(query);
-            
+
             if (affectedRows == 1){
                 tfStaffFullName.setText(null);
                 tfStaffUsername.setText(null);
@@ -1191,10 +1139,8 @@ public class Home_Form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Successful Registration!!!");
             }
             else
-                JOptionPane.showMessageDialog(this, "Error !!!");
+            JOptionPane.showMessageDialog(this, "Error !!!");
 
-        
-       
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }finally{
@@ -1203,57 +1149,102 @@ public class Home_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRegistrationActionPerformed
 
-    private void btnCallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCallActionPerformed
-        JOptionPane.showMessageDialog(this, "Calling +20 010 1234 5678");
-    }//GEN-LAST:event_btnCallActionPerformed
+    private void btnRegistration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistration1ActionPerformed
+        String FullName = tfStaffFullName.getText();
+        String Username = tfStaffUsername.getText();
+        String Password = pfStaffPassword.getText();
+        String ConfirmPassword = pfStaffConfirmPassword.getText();
 
-    private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
-        String Name = tbName.getText();
-       String Email = tbEmail.getText();
-       String Message = tbMessage.getText();
-       
-       if (Name.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your name");
-       
-       if (Email.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your Email");
-       
-       if (Message.isEmpty())
-        JOptionPane.showMessageDialog(this, "Please enter your Message");
-       
-       Connection con =  null;
+        LocalDate myObj = LocalDate.of(2022,2,2);
+        JOptionPane.showMessageDialog(this,myObj);
+
+        if (FullName.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your full name");
+
+        if (Username.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your username");
+
+        if (Password.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your password");
+
+        if (ConfirmPassword.isEmpty())
+        JOptionPane.showMessageDialog(this, "Please enter your confirm password");
+
+        if(!Password.matches(ConfirmPassword))
+        JOptionPane.showMessageDialog(this, "your passwords dont match !!!");
+
+        Connection con =  null;
         Statement stmt =  null;
-        
-       if (Name.isEmpty() || Email.isEmpty() || Message.isEmpty())
-           return;
-       
-       try{
-            
+
+        if (FullName.isEmpty() || Username.isEmpty() || Password.isEmpty() || Password.isEmpty()
+            || ConfirmPassword.isEmpty() || (!Password.matches(ConfirmPassword)))
+        return;
+
+        try{
+
             con= DriverManager.getConnection(Url);
             stmt = con.createStatement();
-            String query = "INSERT INTO Messages VALUES ('"+Name+"','"+Email+"','"+Message+"')";
-            
+            String query = "INSERT INTO Staff VALUES ('"+FullName+"','"+Username+"','"+Password+"')";
+
             int affectedRows = stmt.executeUpdate(query);
-            
+
             if (affectedRows == 1){
-                tbName.setText(null);
-                tbEmail.setText(null);
-                tbMessage.setText(null);
-                JOptionPane.showMessageDialog(this, "Successful Sending!!!");
+                tfStaffFullName.setText(null);
+                tfStaffUsername.setText(null);
+                pfStaffPassword.setText(null);
+                pfStaffConfirmPassword.setText(null);
+                JOptionPane.showMessageDialog(this, "Successful Registration!!!");
             }
             else
-                JOptionPane.showMessageDialog(this, "Error !!!");
+            JOptionPane.showMessageDialog(this, "Error !!!");
 
-        
-       
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }finally{
             if(con != null) { try{ con.close();} catch (Exception ex) {}}
             if(stmt != null) { try{ stmt.close();} catch (Exception ex) {}}
         }
-       
-    }//GEN-LAST:event_btnSendMessageActionPerformed
+    }//GEN-LAST:event_btnRegistration1ActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
+        String Username = tfUsername.getText();
+        String Password = pfPassword.getText();
+
+        if (Username.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please, Enter your username");
+        }
+
+        if (Password.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please, Enter your password");
+        }
+
+        Connection con =  null;
+        Statement stmt =  null;
+        ResultSet result =  null;
+
+        try{
+            con= DriverManager.getConnection(Url);
+            stmt = con.createStatement();
+            String query = "SELECT * FROM Staff WHERE Username='" + Username + "' AND Password='" + Password + "'";
+            result = stmt.executeQuery(query);
+            String FullName = null;
+            if (result.next()){
+                FullName =  result.getString("FullName");
+                JOptionPane.showMessageDialog(this, "Welcome "+FullName);
+            }else
+            {
+                JOptionPane.showMessageDialog(this, "Invalid Username or password");
+            }
+
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }finally{
+            if(con != null) { try{ con.close();} catch (Exception ex) {}}
+            if(stmt != null) { try{ stmt.close();} catch (Exception ex) {}}
+            if(result != null) { try{ result.close();} catch (Exception ex) {}}
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
