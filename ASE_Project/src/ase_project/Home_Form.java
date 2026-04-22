@@ -20,9 +20,25 @@ public class Home_Form extends javax.swing.JFrame {
     private final String Url = "jdbc:sqlserver://localhost:1433;databaseName=Hotel;user=sa;password=sa123456;encrypt=true;trustServerCertificate=true;";
     /**
      * Creates new form Home_Form
+     * 
+     * @param Fullname
      */
+    public Home_Form(String Fullname) {
+        initComponents();
+        JOptionPane.showMessageDialog(this, "Welcome "+Fullname);
+        lUser.setText("Current User: "+Fullname);
+        
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        }catch(ClassNotFoundException ex){
+            JOptionPane.showMessageDialog(this, "Cannot Load JDBC Driver !!!");
+        }
+    }
+    
     public Home_Form() {
         initComponents();
+        JOptionPane.showMessageDialog(this, "Welcome "+"");
+        
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         }catch(ClassNotFoundException ex){
@@ -43,13 +59,6 @@ public class Home_Form extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        lUsername = new javax.swing.JLabel();
-        lPassword = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
-        btnLogin = new javax.swing.JButton();
-        pfPassword = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         lStaffUsername = new javax.swing.JLabel();
@@ -61,6 +70,7 @@ public class Home_Form extends javax.swing.JFrame {
         btnRegistration1 = new javax.swing.JButton();
         pfStaffPassword = new javax.swing.JPasswordField();
         pfStaffConfirmPassword = new javax.swing.JPasswordField();
+        lUser = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         lUsername2 = new javax.swing.JLabel();
@@ -172,70 +182,6 @@ public class Home_Form extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Dashboard ", jPanel1);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Login Information"));
-
-        lUsername.setText("Username");
-
-        lPassword.setText("Password");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(this::btnLoginActionPerformed);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogin))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lUsername)
-                            .addComponent(lPassword))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                            .addComponent(pfPassword))))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lUsername)
-                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lPassword)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(322, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(285, 285, 285))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(556, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Staff Login", jPanel2);
-
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Registration Information"));
 
         lStaffUsername.setText("Username");
@@ -296,6 +242,8 @@ public class Home_Form extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        lUser.setText("Current User:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -304,11 +252,17 @@ public class Home_Form extends javax.swing.JFrame {
                 .addContainerGap(309, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(313, 313, 313))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lUser)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addContainerGap()
+                .addComponent(lUser)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(477, Short.MAX_VALUE))
         );
@@ -548,24 +502,21 @@ public class Home_Form extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tbName, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
                             .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tbName, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                                    .addGroup(jPanel11Layout.createSequentialGroup()
-                                        .addComponent(jLabel19)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1))
-                        .addContainerGap())
+                                .addComponent(jLabel19)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addComponent(tbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel21)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSendMessage)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSendMessage)))
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -1092,7 +1043,6 @@ public class Home_Form extends javax.swing.JFrame {
             if(con != null) { try{ con.close();} catch (Exception ex) {}}
             if(stmt != null) { try{ stmt.close();} catch (Exception ex) {}}
         }
-
     }//GEN-LAST:event_btnSendMessageActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
@@ -1206,46 +1156,6 @@ public class Home_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRegistration1ActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
-        String Username = tfUsername.getText();
-        String Password = pfPassword.getText();
-
-        if (Username.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please, Enter your username");
-        }
-
-        if (Password.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Please, Enter your password");
-        }
-
-        Connection con =  null;
-        Statement stmt =  null;
-        ResultSet result =  null;
-
-        try{
-            con= DriverManager.getConnection(Url);
-            stmt = con.createStatement();
-            String query = "SELECT * FROM Staff WHERE Username='" + Username + "' AND Password='" + Password + "'";
-            result = stmt.executeQuery(query);
-            String FullName = null;
-            if (result.next()){
-                FullName =  result.getString("FullName");
-                JOptionPane.showMessageDialog(this, "Welcome "+FullName);
-            }else
-            {
-                JOptionPane.showMessageDialog(this, "Invalid Username or password");
-            }
-
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }finally{
-            if(con != null) { try{ con.close();} catch (Exception ex) {}}
-            if(stmt != null) { try{ stmt.close();} catch (Exception ex) {}}
-            if(result != null) { try{ result.close();} catch (Exception ex) {}}
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1273,7 +1183,6 @@ public class Home_Form extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCall;
-    private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegistration;
     private javax.swing.JButton btnRegistration1;
     private javax.swing.JButton btnSendMessage;
@@ -1343,19 +1252,16 @@ public class Home_Form extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lPassword;
     private javax.swing.JLabel lPassword3;
     private javax.swing.JLabel lPassword4;
     private javax.swing.JLabel lPassword5;
@@ -1365,9 +1271,8 @@ public class Home_Form extends javax.swing.JFrame {
     private javax.swing.JLabel lStaffFullName;
     private javax.swing.JLabel lStaffPassword;
     private javax.swing.JLabel lStaffUsername;
-    private javax.swing.JLabel lUsername;
+    private javax.swing.JLabel lUser;
     private javax.swing.JLabel lUsername2;
-    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JPasswordField pfStaffConfirmPassword;
     private javax.swing.JPasswordField pfStaffPassword;
     private javax.swing.JTextField tbEmail;
@@ -1379,7 +1284,6 @@ public class Home_Form extends javax.swing.JFrame {
     private javax.swing.JTextField tfPassword6;
     private javax.swing.JTextField tfStaffFullName;
     private javax.swing.JTextField tfStaffUsername;
-    private javax.swing.JTextField tfUsername;
     private javax.swing.JTextField tfUsername3;
     // End of variables declaration//GEN-END:variables
 }

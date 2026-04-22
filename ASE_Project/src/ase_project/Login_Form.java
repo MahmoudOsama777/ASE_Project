@@ -131,11 +131,11 @@ public class Login_Form extends javax.swing.JFrame {
             stmt = con.createStatement();
             String query = "SELECT * FROM Staff WHERE Username='" + Username + "' AND Password='" + Password + "'";
             result = stmt.executeQuery(query);
-            String FullName = null;
+            String Fullname = null;
             if (result.next()){
-                FullName =  result.getString("FullName");
-                JOptionPane.showMessageDialog(this, "Welcome "+FullName);
-                Home_Form home = new Home_Form();
+                Fullname =  result.getString("FullName");
+                
+                Home_Form home = new Home_Form(Fullname);
                 home.setLocation(100,100);
                 home.setVisible(true);
                 home.setResizable(false);

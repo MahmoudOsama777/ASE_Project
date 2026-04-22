@@ -25,11 +25,11 @@ How to run:
 
 2 - JDBC و تختار تالت واحده وتختار الملف اللي جوا مجلد  classpath و هتدوس على علامه الزائد اللي جمب libarires بعديها اختار properties و هتختار Project هتدوس على 
 
-3 - لازم تعلموها هتلاقوها في سكشن 2 sql server configuration manager خطوات 
+3 - sectionلازم تعلموها هتلاقوها في 2 sql server configuration manager خطوات 
 
-4 -d عندك في ال hotel.bak حط ملف 
+4 - D عندك في ال hotel.bak حط ملف 
 
-5 - و اكتب  sqlserver افتح 
+5 - sqlserver افتح  و اكتب في
 
 restore database  Hotel
 from disk  = 'D:/Hotel.bak'
