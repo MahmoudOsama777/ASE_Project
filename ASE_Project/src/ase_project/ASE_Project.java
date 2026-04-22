@@ -12,7 +12,7 @@ public class ASE_Project {
      */
     public static void main(String[] args) {
         Login_Form login = new Login_Form();
-        login.setLocation(400,400);
+        login.setLocation(400,250);
         login.setVisible(true);
         login.setResizable(false);
     }
